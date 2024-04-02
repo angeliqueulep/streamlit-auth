@@ -85,7 +85,7 @@ def get_access_token_from_query_params(
         get_access_token(client=client, redirect_url=redirect_url, code=code)
     )
     # Clear query params
-    st.experimental_set_query_params()
+    st.query_params.clear()
     return token
 
 
