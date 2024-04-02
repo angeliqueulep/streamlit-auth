@@ -80,8 +80,7 @@ async def get_access_token(
 def get_access_token_from_query_params(
     client: GoogleOAuth2, redirect_url: str
 ) -> OAuth2Token:
-    query_params = st.experimental_get_query_params()
-    code = query_params["code"][0]
+    code = st.query_params["code"]
     token = asyncio.run(
         get_access_token(client=client, redirect_url=redirect_url, code=code)
     )
@@ -102,7 +101,7 @@ def get_logged_in_user() -> Optional[Dict]:
         token_from_params = get_access_token_from_query_params(client, redirect_url)
     except KeyError:
         return None
-    
+
     user_info = decode_user(token=token_from_params["id_token"])
 
     return user_info
